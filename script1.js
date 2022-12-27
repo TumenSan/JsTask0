@@ -2,15 +2,17 @@ let number = 1;
 let Products = [];
 let ProductsTitle = [];
 let Count = 11;
-for(let i = 1; i < Count; i++){
-    //Products.push(GetOneProduct(i));
-    GetOneProduct(i);
-}
-setTimeout(() => {
-    OutDivProducts();
-    changeTooltip();
-}, 2000);
 
+async function main(){
+    for(let i = 1; i < Count; i++){
+        //Products.push(GetOneProduct(i));
+        await GetOneProduct(i);
+    }
+
+    await OutDivProducts();
+    await changeTooltip();
+}
+main();
 
 async function GetOneProduct(number) {
     // отправляет запрос и получаем ответ
@@ -25,9 +27,7 @@ async function GetOneProduct(number) {
         ProductsTitle.push(Product.title);
         Products.push(Product);
         console.log(Product);
-        setTimeout(() => {
-            return Product;
-        }, 800);
+        return Product;
     }
 }
 
@@ -48,12 +48,3 @@ function changeTooltip() {
         document.getElementById(i).setAttribute('data-tooltip', str);
     }
 }
-
-/*
-for(let i = 0; i < Count; i++){
-        let BLock = document.getElementsByClassName('ContainerMain')[0];
-        let ObjectProduct = document.createElement('div');
-        ObjectProduct.innerHTML = Products[i].title;
-        BLock.append(ObjectProduct);
-    }
-*/
