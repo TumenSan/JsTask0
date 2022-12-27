@@ -1,11 +1,9 @@
 let number = 1;
 let Products = [];
-let ProductsTitle = [];
-let Count = 11;
+let Count = 10;
 
 async function main(){
-    for(let i = 1; i < Count; i++){
-        //Products.push(GetOneProduct(i));
+    for(let i = 1; i < Count + 1; i++){
         await GetOneProduct(i);
     }
 
@@ -24,7 +22,6 @@ async function GetOneProduct(number) {
     if (response.ok === true) {
         // получаем данные
         let Product = await response.json();
-        ProductsTitle.push(Product.title);
         Products.push(Product);
         console.log(Product);
         return Product;
@@ -32,11 +29,11 @@ async function GetOneProduct(number) {
 }
 
 function OutDivProducts(){
-    for(let i = 0; i < Count - 1; i++){
+    for(let i = 0; i < Count; i++){
         let BLock = document.getElementsByClassName('ContainerMain')[0];
         let ObjectProduct = document.createElement('div');
         ObjectProduct.className = "ContainerBlock";
-        ObjectProduct.innerHTML = ProductsTitle[i];
+        ObjectProduct.innerHTML = Products[i].title;
         ObjectProduct.id = i;
         BLock.append(ObjectProduct);
     }
