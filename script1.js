@@ -2,6 +2,21 @@ let number = 1;
 let Products = [];
 let Count = 10;
 
+main();
+
+async function mainValue(){
+    await remove();
+    //Count = Number(document.getElementById("selvalue").value);
+    Count = Number(selvalue.value);
+    await main();
+}
+
+function remove(){
+    for(let i = 0; i < Count; i++){
+        document.getElementById(i).remove();
+    }
+}
+
 async function main(){
     for(let i = 1; i < Count + 1; i++){
         await GetOneProduct(i);
@@ -10,7 +25,6 @@ async function main(){
     await OutDivProducts();
     await changeTooltip();
 }
-main();
 
 async function GetOneProduct(number) {
     // отправляет запрос и получаем ответ
