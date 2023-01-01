@@ -50,6 +50,17 @@ function OutDivProducts(){
         ObjectProduct.innerHTML = Products[i].title;
         ObjectProduct.id = i;
         BLock.append(ObjectProduct);
+
+        let BLockDescr = document.getElementsByClassName('ContainerBlock')[i];
+        let ObjectProductDescr = document.createElement('div');
+        ObjectProductDescr.className = "descr";
+        ObjectProductDescr.innerText = Products[i].id + '\n' + Products[i].brand
+        + '\n' + Products[i].category + '\n' + Products[i].description 
+        + '\n' + Products[i].discountPercentage + '\n' + Products[i].price
+        + '\n' + Products[i].rating + '\n' + Products[i].stock + '\n' + Products[i].thumbnail
+        + '\n' + Products[i].title;
+        ObjectProductDescr.id = 'descr_' + i;
+        BLockDescr.append(ObjectProductDescr);
     }
 }
 
