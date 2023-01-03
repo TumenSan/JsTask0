@@ -1,32 +1,35 @@
 let number = 1;
 let Products = [];
-let Count = 10;
+//let Count = 10;
 //по умолчанию
-main();
+main(10);
 
 //количество продуктов изменено
 async function mainValue(){
-    await remove();
     //Count = Number(document.getElementById("selvalue").value);
-    Count = Number(selvalue.value);
-    await main();
+    let Count = Number(selvalue.value);
+    await remove();
+    await main(Count);
 }
 
 //удаляем все блоки
 function remove(){
-    for(let i = 0; i < Count; i++){
-        document.getElementById(i).remove();
+    let container = document.getElementById('ContainerMain');
+
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
     }
+    
 }
 
 //Основные функции
-async function main(){
+async function main(Quantity){
+    let Count = Quantity;
     for(let i = 1; i < Count + 1; i++){
         await GetOneProduct(i);
     }
 
-    await OutDivProducts();
-    await changeTooltip();
+    await OutDivProducts(Count);
 }
 
 //получаем запросом один продукт
@@ -47,7 +50,8 @@ async function GetOneProduct(number) {
 }
 
 //добавление блоков с продуктами
-function OutDivProducts(){
+function OutDivProducts(Quantity){
+    let Count = Quantity;
     for(let i = 0; i < Count; i++){
         //добавление блока с названием продукта
         let BLock = document.getElementsByClassName('ContainerMain')[0];
@@ -61,19 +65,12 @@ function OutDivProducts(){
         let BLockDescr = document.getElementsByClassName('ContainerBlock')[i];
         let ObjectProductDescr = document.createElement('div');
         ObjectProductDescr.className = "descr";
-        ObjectProductDescr.innerText = Products[i].id + '\n' + Products[i].brand
-        + '\n' + Products[i].category + '\n' + Products[i].description 
-        + '\n' + Products[i].discountPercentage + '\n' + Products[i].price
-        + '\n' + Products[i].rating + '\n' + Products[i].stock + '\n' + Products[i].thumbnail
-        + '\n' + Products[i].title;
+        ObjectProductDescr.innerText = 'id: ' + Products[i].id + '\n' + 'brand: ' + Products[i].brand
+        + '\n' + 'category: ' + Products[i].category + '\n' + 'description: ' + Products[i].description 
+        + '\n' + 'discountPercentage: ' + Products[i].discountPercentage + '\n' + 'price: ' + Products[i].price
+        + '\n' + 'rating: ' + Products[i].rating + '\n' + 'stock: ' + Products[i].stock 
+        + '\n' + 'thumbnail: ' + Products[i].thumbnail + '\n' + 'title: ' + Products[i].title;
         ObjectProductDescr.id = 'descr_' + i;
         BLockDescr.append(ObjectProductDescr);
-    }
-}
-
-function changeTooltip() {
-    for(let i = 0; i < Count; i++){
-        let str = Products[i].id + ' ' + Products[i].title;
-        document.getElementById(i).setAttribute('data-tooltip', str);
     }
 }

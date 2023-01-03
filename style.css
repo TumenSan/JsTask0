@@ -1,56 +1,36 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .ContainerMain{
-    width: 400px;
+  width: 400px;
 }
 
 .ContainerBlock{
-    height: 20px;
-    width: 350px;
-    background: blue;
-    margin-top: 40px;
+  height: 20px;
+  width: 350px;
+  background: blue;
+  margin-top: 40px;
 }
 
 .descr{
-    display:none;
-    margin-left:350px;
-    padding:10px;
-    margin-top:17px;
-    background:#f3f3f3;
-    -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
-    box-shadow:0 5px 5px rgba(0,0,0,0.3);
+  display:none;
+  margin-left:350px;
+  padding:10px;
+  margin-top:0px;
+  background:#f3f3f3;
+  -moz-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+  -webkit-box-shadow:0 5px 5px rgba(0,0,0,0.3);
+  box-shadow:0 5px 5px rgba(0,0,0,0.3);
 }
 
 .ContainerBlock:hover .descr{
-    display:block;
-    position:absolute;
-    top:0px;
-    z-index:9999;
-    width:400px;
+  display:block;
+  top:0px;
+  z-index:9999;
+  width:400px;
 }
 
-[data-tooltip] {
-    position: relative; /* Относительное позиционирование */ 
-   }
-   [data-tooltip]::after {
-    content: attr(data-tooltip); /* Выводим текст */
-    position: absolute; /* Абсолютное позиционирование */
-    width: 300px; /* Ширина подсказки */
-    margin-left: 20px;
-    top: 0;
-    /*left: 400; top: 0; /* Положение подсказки */
-    background: #3989c9; /* Синий цвет фона */
-    color: #fff; /* Цвет текста */
-    padding: 0.5em; /* Поля вокруг текста */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Параметры тени */
-    pointer-events: none; /* Подсказка */
-    opacity: 0; /* Подсказка невидима */
-    transition: 1s; /* Время появления подсказки */
-   } 
-   [data-tooltip]:hover::after {
-    opacity: 1; /* Показываем подсказку */
-    top: 1em; /* Положение подсказки */
-   }
+.NewHeight{
+  height: 300px;
+}
