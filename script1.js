@@ -2,29 +2,18 @@ let number = 1;
 let Products = [];
 //let Count = 10;
 //по умолчанию
-main(10);
+main();
 
-//количество продуктов изменено
-async function mainValue(){
-    //Count = Number(document.getElementById("selvalue").value);
-    let Count = Number(selvalue.value);
-    await remove();
-    await main(Count);
-}
-
-//удаляем все блоки
-function remove(){
+//Основные функции
+async function main(){
+    //удаляем все блоки
     let container = document.getElementById('ContainerMain');
-
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
-    
-}
 
-//Основные функции
-async function main(Quantity){
-    let Count = Quantity;
+    //добавляем блоки
+    let Count = Number(selvalue.value);
     for(let i = 1; i < Count + 1; i++){
         await GetOneProduct(i);
     }
