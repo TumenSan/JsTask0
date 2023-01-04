@@ -8,16 +8,18 @@
     <link href="style.css" rel="stylesheet" />
 </head>
 <body>
-    <select id="selvalue">
-        <option value=5>5</option>
-        <option selected="selected">10</option>
-        <option value=15>15</option>
-        <option value=20>20</option> 
-        <option value=30>30</option> 
-    </select>
-    <button id="GetOneProductButton" onclick="main()"> Получить список продуктов</button>
-    <button id="SortByIdButton" onclick="sortId()"> IdSort</button>
-    <button id="SortByPriceButton" onclick="sortPrice()"> PriceSort</button>
+    <header>
+        <select id="selvalue">
+            <option value=5>5</option>
+            <option selected="selected">10</option>
+            <option value=15>15</option>
+            <option value=20>20</option> 
+            <option value=30>30</option> 
+        </select>
+        <button id="GetOneProductButton" onclick="main()"> Получить список продуктов</button>
+        <button id="SortByIdButton" onclick="sortId()"> IdSort</button>
+        <button id="SortByPriceButton" onclick="sortPrice()"> PriceSort</button>
+    </header>
 
     <div class="ContainerMain" id="ContainerMain"></div>
 

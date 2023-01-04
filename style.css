@@ -2,15 +2,22 @@ body {
   margin: 0;
 }
 
+header {
+  margin-bottom: 20px;
+}
+
 .ContainerMain{
   width: 400px;
 }
 
 .ContainerBlock{
-  height: 20px;
+  height: 60px;
   width: 350px;
-  background: blue;
-  margin-top: 40px;
+
+  border: 1px solid #3d46cc;
+  text-align: center;
+  cursor: move;
+  background-color: #b2d9d0;
 }
 
 .descr{

@@ -1,11 +1,11 @@
-let number = 1;
 let Products = [];
-//let Count = 10;
-//по умолчанию
+
+//по умолчанию 10
 main();
 
 //Основные функции
 async function main(){
+    Products = [];
     //удаляем все блоки
     let container = document.getElementById('ContainerMain');
     while (container.firstChild) {
@@ -53,14 +53,18 @@ function OutDivProducts(){
         let BLockDescr = document.getElementsByClassName('ContainerBlock')[i];
         let ObjectProductDescr = document.createElement('div');
         ObjectProductDescr.className = "descr";
-        ObjectProductDescr.innerText = 'id: ' + Products[i].id + '\n' + 'brand: ' + Products[i].brand
-        + '\n' + 'category: ' + Products[i].category + '\n' + 'description: ' + Products[i].description 
-        + '\n' + 'discountPercentage: ' + Products[i].discountPercentage + '\n' + 'price: ' + Products[i].price
+        ObjectProductDescr.innerText = 'title: ' + Products[i].title + '\n' + 'id: ' + Products[i].id 
+        + '\n' + 'brand: ' + Products[i].brand + '\n' + 'category: ' + Products[i].category 
+        + '\n' + 'description: ' + Products[i].description + '\n' + 'discountPercentage: ' 
+        + Products[i].discountPercentage + '\n' + 'price: ' + Products[i].price
         + '\n' + 'rating: ' + Products[i].rating + '\n' + 'stock: ' + Products[i].stock 
-        + '\n' + 'thumbnail: ' + Products[i].thumbnail + '\n' + 'title: ' + Products[i].title;
+        + '\n' + 'thumbnail: ' + Products[i].thumbnail;
         ObjectProductDescr.id = 'descr_' + i;
         BLockDescr.append(ObjectProductDescr);
     }
+
+    //логика движения объектов
+    MoveObjects();
 }
 
 
@@ -120,4 +124,51 @@ function sortPrice(){
   }
 
   OutDivProducts();
+}
+
+
+//логика движения объектов
+function MoveObjects(){
+    //По умолчанию большинство элементов не может перемещаться, 
+    //поэтому присвоим им атрибут draggable со значением 
+    //true, чтобы изменить это поведение.
+    const tasksListElement = document.querySelector(`.ContainerMain`);
+    const taskElements = tasksListElement.querySelectorAll(`.ContainerBlock`);
+
+    for (const task of taskElements) {
+        task.draggable = true;
+    }
+
+    //какой элемент на данный момент перетаскивается
+    tasksListElement.addEventListener(`dragstart`, (evt) => {
+        evt.target.classList.add(`selected`);
+    });
+
+    //В момент окончания перетаскивания нужно убирать класс selected у элемента
+    tasksListElement.addEventListener(`dragend`, (evt) => {
+        evt.target.classList.remove(`selected`);
+    });
+    
+    //отслеживаем местоположение перемещаемого элемента относительно других, 
+    //подписавшись на событие dragover
+    tasksListElement.addEventListener(`dragover`, (evt) => {
+        evt.preventDefault();
+
+        const activeElement = tasksListElement.querySelector(`.selected`);
+        const currentElement = evt.target;
+        const isMoveable = activeElement !== currentElement &&
+        currentElement.classList.contains(`ContainerBlock`);
+
+        if (!isMoveable) {
+            return;
+        }
+
+        //найдём элемент, перед которым нужно осуществить вставку
+        const nextElement = (currentElement === activeElement.nextElementSibling) ?
+		currentElement.nextElementSibling :
+		currentElement;
+
+        tasksListElement.insertBefore(activeElement, nextElement);
+    });
+      
 }
