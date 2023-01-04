@@ -148,6 +148,19 @@ function MoveObjects(){
     tasksListElement.addEventListener(`dragend`, (evt) => {
         evt.target.classList.remove(`selected`);
     });
+
+    //вставку только после того, как курсор пересечёт 
+    //центральную ось, а не сразу после наведения на элемент
+    const getNextElement = (cursorPosition, currentElement) => {
+        const currentElementCoord = currentElement.getBoundingClientRect();
+        const currentElementCenter = currentElementCoord.y + currentElementCoord.height / 2;
+        
+        const nextElement = (cursorPosition < currentElementCenter) ?
+            currentElement :
+            currentElement.nextElementSibling;
+        
+        return nextElement;
+    }; 
     
     //отслеживаем местоположение перемещаемого элемента относительно других, 
     //подписавшись на событие dragover
@@ -164,9 +177,17 @@ function MoveObjects(){
         }
 
         //найдём элемент, перед которым нужно осуществить вставку
-        const nextElement = (currentElement === activeElement.nextElementSibling) ?
-		currentElement.nextElementSibling :
-		currentElement;
+        const nextElement = getNextElement(evt.clientY, currentElement);
+
+        //учесть ситуацию, когда во время перемещения курсор был 
+        //наведён на какой-то элемент и при этом центральную ось так и не пересёк
+        if (
+            nextElement && 
+            activeElement === nextElement.previousElementSibling ||
+            activeElement === nextElement
+        ) {
+            return;
+        }
 
         tasksListElement.insertBefore(activeElement, nextElement);
     });
